@@ -7,6 +7,7 @@ var option1 = document.getElementById('option1')
 var option2 = document.getElementById('option2')
 var option3 = document.getElementById('option3')
 var option4 = document.getElementById('option4')
+var results = document.getElementById('results')
 var questionIndex = 0;
 
 
@@ -17,12 +18,10 @@ start.addEventListener('click', function () {
 
 
 function renderQuestion() {
-
+    results.textContent = ""
     var currentQuestion = questions[questionIndex];
     var answer = currentQuestion.answer;
-    console.log(answer)
-    JSON.stringify(answer);
-    console.log(answer)
+
     console.log(currentQuestion.question);
     for (var i = 0; i < currentQuestion.options.length; i++) {
         questionHeading.textContent = currentQuestion.question;
@@ -38,8 +37,76 @@ function renderQuestion() {
 
 questionList.addEventListener('click', function (event) {
     var element = event.target
-    if (element === option4) {
-        console.log('click')
+    console.log(element)
+    if (questionIndex === 0) {
+
+        option4.dataset.answer = 'true'
+        if (element.matches("li#option4")) {
+            console.log('clickar')
+            results.textContent = "Correct!"
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+
+        } else {
+            results.textContent = "Sorry, that's not correct."
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+        }
+    }
+    else if (questionIndex === 1) {
+        if (element.matches("li#option3")) {
+            console.log('clickar')
+            results.textContent = "Correct!"
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+
+        } else {
+            results.textContent = "Sorry, that's not correct."
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+        }
+    }
+    else if (questionIndex === 2) {
+        if (element.matches("li#option1")) {
+            console.log('clickar')
+            results.textContent = "Correct!"
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+
+        } else {
+            results.textContent = "Sorry, that's not correct."
+            questionIndex++
+            setTimeout(() => {
+                renderQuestion();
+            }, 1000);
+        }
+    }
+    else if (questionIndex === 3) {
+        if (element.matches("li#option2")) {
+            console.log('clickar')
+            results.textContent = "Correct!"
+            questionIndex++
+            setTimeout(() => {
+                window.location.href = "score.html"
+            }, 1000);
+
+        } else {
+            results.textContent = "Sorry, that's not correct."
+            questionIndex++
+            setTimeout(() => {
+                window.location.href = "score.html"
+            }, 1000);
+        }
     }
 
 
@@ -86,6 +153,18 @@ var questions = [
             "Hope There's Much Learned",
             "Hi There My Love",
             "Help The Meerkats Learn!"
+        ],
+        answer: "Hypertext Markup Language"
+
+    },
+    {
+        label: "Question 4",
+        question: "How do you call a function?",
+        options: [
+            "Heeeere, function, function",
+            "myFunction();",
+            "myFunction;",
+            "execute: myFunction;"
         ],
         answer: "Hypertext Markup Language"
 
