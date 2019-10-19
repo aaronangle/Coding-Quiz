@@ -8,19 +8,22 @@ var option2 = document.getElementById('option2')
 var option3 = document.getElementById('option3')
 var option4 = document.getElementById('option4')
 var results = document.getElementById('results')
+var submit = document.getElementById('submit')
+var textBox = document.getElementById('textBox')
+var enterScore = document.getElementById('enterScore')
+var highScoreContainer = document.getElementById('highScoreContainer')
+var highScoreList = document.getElementById('highScoreList')
 var questionIndex = 0;
-
+var scores = []
 
 start.addEventListener('click', function () {
     mainContent.style.display = 'none';
     renderQuestion();
 })
 
-
 function renderQuestion() {
     results.textContent = ""
     var currentQuestion = questions[questionIndex];
-    var answer = currentQuestion.answer;
 
     console.log(currentQuestion.question);
     for (var i = 0; i < currentQuestion.options.length; i++) {
@@ -31,9 +34,7 @@ function renderQuestion() {
         option4.textContent = questions[questionIndex].options[3];
 
     }
-
 }
-
 
 questionList.addEventListener('click', function (event) {
     var element = event.target
@@ -113,14 +114,6 @@ questionList.addEventListener('click', function (event) {
 })
 
 
-questionHeading.addEventListener('click', function () {
-    questionHeading.textContent = 'Not today JR'
-})
-
-
-
-
-
 var questions = [
     {
         label: "Question1",
@@ -172,17 +165,25 @@ var questions = [
 
 ]
 
+function submitIt() {
+
+
+    //get the value of the submit and push it to the array
+    initials = textBox.value
+    if (initials) {
+        enterScore.style.display = 'none';
+        //create a list item with the value of input box in it
+        //append the list item to the unordered lsit
+
+
+
+    } else {
+        alert("Please enter your initials into the textBox")
+    }
+    //create the go back button
+    //create the clear highscore button
+}
 
 
 
 
-
-// var todo = document.getElementById('todo')
-// function grabText() {
-//     var text = todoText.value
-//     console.log(text)
-// }
-
-// function renderAnswers() {
-//     for
-// }

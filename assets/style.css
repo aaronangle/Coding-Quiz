@@ -59,3 +59,34 @@ html, body{
     font-size: 20px;
     text-align: center;
 }
+#enterScore{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 60%;
+    width: 50%;
+    margin-left: 40%;
+}
+.colwidth{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.colwidth p{
+    margin-right: 10px;
+}
+#submit{
+    margin-left: 10px;
+    background-color: purple;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 5px;
+}
+#submit:hover{
+    background-color: #d8d8d8;
+    color: purple;
+}

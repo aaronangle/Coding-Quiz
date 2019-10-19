@@ -19,9 +19,22 @@
             <!--Will hold the countdown timer-->
             <p class="timer">Time: <span id="time"> </span></p>
         </div>
+        <div id="enterScore">
+            <h1>All Done!</h1>
+            <p>Your final score is <span id="finalScore"> </span></p>
+            <div class="colwidth">
+                <p>Enter your initials:</p><input id="textBox" type="text"><input id="submit" onclick="submitIt()"
+                    type="submit" value="Submit">
+            </div>
+        </div>
+        <div id="highScoreContainer">
+            <h1></h1>
+            <ul id="highScoreList">
 
-
-
+            </ul>
+        </div>
+        <script src="assets/app.js">
+        </script>
 </body>
 
 </html>
