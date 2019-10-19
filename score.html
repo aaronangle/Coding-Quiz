@@ -15,25 +15,31 @@
         <!--Container for top part of the program-->
         <div class="header">
             <!--Link this to the Highscore page-->
-            <p class="highscore"><a href="#">View Highscores</a></p>
+            <p class="highscore" onclick="viewScore()">View Highscores</p>
             <!--Will hold the countdown timer-->
             <p class="timer">Time: <span id="time"> </span></p>
         </div>
         <div id="enterScore">
             <h1>All Done!</h1>
-            <p>Your final score is <span id="finalScore"> </span></p>
+            <p>Your final score is</p>
+            <p id="finalScore"> </p>
             <div class="colwidth">
-                <p>Enter your initials:</p><input id="textBox" type="text"><input id="submit" onclick="submitIt()"
+                <p>Enter your name:</p><input id="textBox" type="text"><input id="submit" onclick="submitIt()"
                     type="submit" value="Submit">
             </div>
         </div>
         <div id="highScoreContainer">
-            <h1></h1>
+            <h1 id="highScoreHeading"></h1>
             <ul id="highScoreList">
 
             </ul>
+            <div class="buttonCont">
+                <button id="clearScore" onclick="clearScores()"></button>
+                <button id="returnHome" onclick="homePage()"></button>
+            </div>
         </div>
         <script src="assets/app.js">
+
         </script>
 </body>
 

@@ -15,7 +15,7 @@
         <!--Container for top part of the program-->
         <div class="header">
             <!--Link this to the Highscore page-->
-            <p class="highscore"><a href="#">View Highscores</a></p>
+            <p class="highscore" onclick="viewScore()">View Highscores</p>
             <!--Will hold the countdown timer-->
             <p class="timer">Time: <span id="time"> </span></p>
         </div>
@@ -25,7 +25,7 @@
             <p>You will be asked a few questions to test your knowledge. Be mindful of the timer at the top because if
                 it runs out the quiz is over. The faster you finish the higher your score will be. Hit the start button
                 to begin the quiz.</p>
-            <button id="start">Start</button>
+            <button id="start" onclick="startIt(); countDown();">Start</button>
             <input id="todo" type='text'></input>
         </div>
         <div id="questionDisplay">

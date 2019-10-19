@@ -90,3 +90,42 @@ html, body{
     background-color: #d8d8d8;
     color: purple;
 }
+#highScoreContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+    width: 50%;
+    margin: auto;
+}
+#highScoreList{
+    padding:0;
+}
+#highScoreList li{
+    background-color: rgb(194, 132, 194);
+    color:white;
+    list-style: none;
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+}
+#returnHome, #clearScore{
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    margin: 10px;
+}
+#returnHome:hover, #clearScore:hover{
+    background-color: #d8d8d8;
+    color: purple;
+}
+.buttonCont{
+    display: flex;
+    flex-direction: row;
+}

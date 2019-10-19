@@ -13,13 +13,31 @@ var textBox = document.getElementById('textBox')
 var enterScore = document.getElementById('enterScore')
 var highScoreContainer = document.getElementById('highScoreContainer')
 var highScoreList = document.getElementById('highScoreList')
+var highScoreHeading = document.getElementById('highScoreHeading')
+var clearScore = document.getElementById('clearScore')
+var returnHome = document.getElementById('returnHome')
+var time = document.getElementById('time')
+var finalScore = document.getElementById('finalScore')
 var questionIndex = 0;
 var scores = []
+timer = 30;
 
-start.addEventListener('click', function () {
+
+function startIt() {
     mainContent.style.display = 'none';
     renderQuestion();
-})
+}
+
+function countDown() {
+    setInterval(() => {
+        if (timer > 0) {
+            timer--
+            time.textContent = timer
+            console.log(timer)
+            localStorage.setItem('time', timer)
+        }
+    }, 1000);
+}
 
 function renderQuestion() {
     results.textContent = ""
@@ -99,6 +117,7 @@ questionList.addEventListener('click', function (event) {
             questionIndex++
             setTimeout(() => {
                 window.location.href = "score.html"
+
             }, 1000);
 
         } else {
@@ -106,12 +125,14 @@ questionList.addEventListener('click', function (event) {
             questionIndex++
             setTimeout(() => {
                 window.location.href = "score.html"
+
             }, 1000);
         }
     }
 
 
 })
+
 
 
 var questions = [
@@ -169,11 +190,27 @@ function submitIt() {
 
 
     //get the value of the submit and push it to the array
-    initials = textBox.value
+    var initials = textBox.value
     if (initials) {
         enterScore.style.display = 'none';
+        highScoreHeading.textContent = "Highscores"
+        clearScore.textContent = "Clear Scores"
+        returnHome.textContent = "Go Back"
+
         //create a list item with the value of input box in it
-        //append the list item to the unordered lsit
+        scores.push(initials)
+        for (let i = 0; i < scores.length; i++) {
+
+            //append the list item to the unordered lsit
+            var li = document.createElement("li");
+            li.setAttribute('class', 'scoreList')
+            var timeScore = localStorage.getItem('time')
+            li.textContent = initials + " - " + timeScore;
+
+            highScoreList.appendChild(li)
+
+
+        }
 
 
 
@@ -182,8 +219,18 @@ function submitIt() {
     }
     //create the go back button
     //create the clear highscore button
+
 }
 
+function clearScores() {
+    document.querySelector('.scoreList').style.display = 'none'
+}
 
+function homePage() {
+    window.location.href = "index.html"
+}
+function viewScore() {
 
+    window.location.href = "score.html"
 
+}
