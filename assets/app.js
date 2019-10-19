@@ -53,6 +53,56 @@ function renderQuestion() {
 
     }
 }
+function submitIt() {
+
+
+    //get the value of the submit and push it to the array
+    var initials = textBox.value
+    if (initials) {
+        enterScore.style.display = 'none';
+        highScoreHeading.textContent = "Highscores"
+        clearScore.textContent = "Clear Scores"
+        returnHome.textContent = "Go Back"
+
+        //create a list item with the value of input box in it
+        scores.push(initials)
+        for (let i = 0; i < scores.length; i++) {
+
+            //append the list item to the unordered lsit
+            var li = document.createElement("li");
+            li.setAttribute('class', 'scoreList')
+            var timeScore = localStorage.getItem('time')
+            li.textContent = initials + " - " + timeScore;
+
+            highScoreList.appendChild(li)
+
+
+        }
+
+
+
+    } else {
+        alert("Please enter your initials into the textBox")
+    }
+    //create the go back button
+    //create the clear highscore button
+
+}
+
+function clearScores() {
+    document.querySelector('.scoreList').style.display = 'none'
+}
+
+function homePage() {
+    window.location.href = "index.html"
+}
+function viewScore() {
+
+    window.location.href = "score.html"
+
+}
+
+
 
 questionList.addEventListener('click', function (event) {
     var element = event.target
@@ -186,51 +236,3 @@ var questions = [
 
 ]
 
-function submitIt() {
-
-
-    //get the value of the submit and push it to the array
-    var initials = textBox.value
-    if (initials) {
-        enterScore.style.display = 'none';
-        highScoreHeading.textContent = "Highscores"
-        clearScore.textContent = "Clear Scores"
-        returnHome.textContent = "Go Back"
-
-        //create a list item with the value of input box in it
-        scores.push(initials)
-        for (let i = 0; i < scores.length; i++) {
-
-            //append the list item to the unordered lsit
-            var li = document.createElement("li");
-            li.setAttribute('class', 'scoreList')
-            var timeScore = localStorage.getItem('time')
-            li.textContent = initials + " - " + timeScore;
-
-            highScoreList.appendChild(li)
-
-
-        }
-
-
-
-    } else {
-        alert("Please enter your initials into the textBox")
-    }
-    //create the go back button
-    //create the clear highscore button
-
-}
-
-function clearScores() {
-    document.querySelector('.scoreList').style.display = 'none'
-}
-
-function homePage() {
-    window.location.href = "index.html"
-}
-function viewScore() {
-
-    window.location.href = "score.html"
-
-}
