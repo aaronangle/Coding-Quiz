@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Coding-Quiz</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
@@ -20,16 +20,27 @@
             <p class="timer">Time: <span id="time"> </span></p>
         </div>
         <!--Will hold all the question and such-->
-        <div class="main-content">
+        <div id="main-content">
             <h1>Welcome to the Coding Quiz</h1>
             <p>You will be asked a few questions to test your knowledge. Be mindful of the timer at the top because if
                 it runs out the quiz is over. The faster you finish the higher your score will be. Hit the start button
                 to begin the quiz.</p>
             <button id="start">Start</button>
+            <input id="todo" type='text'></input>
+        </div>
+        <div id="questionDisplay">
+            <h1 id="questionHeading"></h1>
+            <ul class="questionList">
+                <li class="option" id="option1"></li>
+                <li class="option" id="option2"></li>
+                <li class="option" id="option3"></li>
+                <li class="option" id="option4"></li>
+            </ul>
         </div>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="assets/app.js">
+    </script>
 </body>
 
 </html>
