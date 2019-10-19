@@ -27,7 +27,7 @@ html, body{
     margin: auto;
 }
 #questionDisplay{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     height: 80%;
@@ -48,6 +48,7 @@ html, body{
 .option:hover{
     background-color: #d8d8d8;
     color: purple;
+    cursor: pointer;
 }
 #questionList{
     padding: 0;
@@ -89,9 +90,10 @@ html, body{
 #submit:hover{
     background-color: #d8d8d8;
     color: purple;
+    cursor: pointer;
 }
 #highScoreContainer{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -111,7 +113,7 @@ html, body{
     border-radius: 5px;
     text-align: left;
 }
-#returnHome, #clearScore{
+#returnHome, #clearScore, #start{
     background-color: purple;
     color: white;
     border: none;
@@ -121,11 +123,18 @@ html, body{
     text-align: center;
     margin: 10px;
 }
-#returnHome:hover, #clearScore:hover{
+#returnHome:hover, #clearScore:hover, #start:hover{
     background-color: #d8d8d8;
     color: purple;
+    cursor: pointer;
 }
 .buttonCont{
     display: flex;
     flex-direction: row;
+}
+.highscore:hover{
+    cursor: pointer;
+}
+#finalScore{
+    display: inline-block;
 }
