@@ -49,7 +49,7 @@ html, body{
     background-color: #d8d8d8;
     color: purple;
 }
-.questionList{
+#questionList{
     padding: 0;
 }
 #questionHeading{

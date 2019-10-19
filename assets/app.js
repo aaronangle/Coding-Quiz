@@ -1,6 +1,7 @@
 var start = document.getElementById('start')
 var mainContent = document.getElementById('main-content')
 var questionDisplay = document.getElementById('questionDisplay')
+var questionList = document.getElementById('questionList')
 var questionHeading = document.getElementById('questionHeading')
 var option1 = document.getElementById('option1')
 var option2 = document.getElementById('option2')
@@ -18,6 +19,10 @@ start.addEventListener('click', function () {
 function renderQuestion() {
 
     var currentQuestion = questions[questionIndex];
+    var answer = currentQuestion.answer;
+    console.log(answer)
+    JSON.stringify(answer);
+    console.log(answer)
     console.log(currentQuestion.question);
     for (var i = 0; i < currentQuestion.options.length; i++) {
         questionHeading.textContent = currentQuestion.question;
@@ -25,19 +30,27 @@ function renderQuestion() {
         option2.textContent = questions[questionIndex].options[1];
         option3.textContent = questions[questionIndex].options[2];
         option4.textContent = questions[questionIndex].options[3];
-        console.log(currentQuestion.answer)
+
+    }
+
+}
+
+
+questionList.addEventListener('click', function (event) {
+    var element = event.target
+    if (element === option4) {
+        console.log('click')
     }
 
 
+})
 
 
+questionHeading.addEventListener('click', function () {
+    questionHeading.textContent = 'Not today JR'
+})
 
 
-    questionHeading.addEventListener('click', function () {
-        questionHeading.textContent = 'Not today JR'
-    })
-
-}
 
 
 
