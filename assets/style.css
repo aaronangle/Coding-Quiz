@@ -138,3 +138,6 @@ html, body{
 #finalScore{
     display: inline-block;
 }
+li{
+    margin: 5px;
+}

@@ -20,8 +20,8 @@ var time = document.getElementById('time')
 var finalScore = document.getElementById('finalScore')
 var questionIndex = 0;
 
-timer = 50;
-scoreList = []
+var timer = 50;
+var scoreList = []
 
 
 function startIt() {
@@ -32,12 +32,12 @@ function startIt() {
 
 function countDown() {
     setInterval(() => {
-        if (timer > 0) {
-            timer--
-            time.textContent = timer
 
-            localStorage.setItem('time', timer)
-        }
+        timer--
+        time.textContent = timer
+
+        localStorage.setItem('time', timer)
+
     }, 1000);
 }
 
@@ -69,10 +69,12 @@ function initialize() {
 }
 function submitIt() {
     //get the value of the submit and push it to the array
-    var name = textBox.value.trim();
+    var theTime = localStorage.getItem("time")
+    var name = textBox.value.trim() + "   " + theTime;
+
     if (name) {
         initialize();
-
+        highScoreContainer.style.display = "flex";
 
         enterScore.style.display = 'none';
         highScoreHeading.textContent = "Highscores"
@@ -199,7 +201,7 @@ if (questionList) {
                 timer = timer + 5;
                 setTimeout(() => {
                     window.location.href = "score.html"
-                    finalScore.textContent = "hi"
+
                 }, 1000);
 
             } else {
