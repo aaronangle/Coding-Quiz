@@ -1,3 +1,4 @@
+//Variables from the HTML elements
 var start = document.getElementById('start')
 var mainContent = document.getElementById('main-content')
 var questionDisplay = document.getElementById('questionDisplay')
@@ -18,33 +19,30 @@ var clearScore = document.getElementById('clearScore')
 var returnHome = document.getElementById('returnHome')
 var time = document.getElementById('time')
 var finalScore = document.getElementById('finalScore')
-var questionIndex = 0;
 
+//Self made variables
+var questionIndex = 0;
 var timer = 50;
 var scoreList = []
 
-
+//Activated when the start button is clicked
 function startIt() {
     mainContent.style.display = 'none';
     questionDisplay.style.display = 'flex';
     renderQuestion();
 }
-
+//Countdown timer for the quiz
 function countDown() {
     setInterval(() => {
-
         timer--
         time.textContent = timer
-
         localStorage.setItem('time', timer)
-
     }, 1000);
 }
-
+//This will display the questions in order each time it is called upon
 function renderQuestion() {
     results.textContent = ""
     var currentQuestion = questions[questionIndex];
-
 
     for (var i = 0; i < currentQuestion.options.length; i++) {
         questionHeading.textContent = currentQuestion.question;
@@ -52,7 +50,6 @@ function renderQuestion() {
         option2.textContent = questions[questionIndex].options[1];
         option3.textContent = questions[questionIndex].options[2];
         option4.textContent = questions[questionIndex].options[3];
-
     }
 }
 
@@ -70,9 +67,10 @@ function initialize() {
 function submitIt() {
     //get the value of the submit and push it to the array
     var theTime = localStorage.getItem("time")
-    var name = textBox.value.trim() + "   " + theTime;
+    var userName = textBox.value.trim();
+    var name = userName + "   " + theTime;
 
-    if (name) {
+    if (userName) {
         initialize();
         highScoreContainer.style.display = "flex";
 
@@ -85,9 +83,6 @@ function submitIt() {
 
         storeScoreList();
         renderScoreList();
-
-
-
     } else {
         alert("Please enter your initials into the textBox")
     }
@@ -130,100 +125,49 @@ function viewScore() {
 
 }
 
-
 if (questionList) {
-
-    questionList.addEventListener('click', function (event) {
+    questionList.addEventListener("click", function (event) {
         var element = event.target
 
-        if (questionIndex === 0) {
-            if (element.matches("li#option4")) {
+        var currentQuestion = questions[questionIndex];
 
+        for (let i = 0; i < 1; i++) {
+            console.log(questionIndex)
+            questionIndex++
+            if (element.textContent === currentQuestion.answer && questionIndex < questions.length) {
                 results.textContent = "Correct!"
-                questionIndex++
-                timer = timer + 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-
-            } else {
-                results.textContent = "Sorry, that's not correct."
-                questionIndex++
-                timer = timer - 5;
+                console.log(results.textContent)
+                timer = timer + 5
                 setTimeout(() => {
                     renderQuestion();
                 }, 1000);
             }
-        }
-        else if (questionIndex === 1) {
-            if (element.matches("li#option3")) {
-
-                results.textContent = "Correct!"
-                questionIndex++
-                timer = timer + 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-
-            } else {
+            else if (questionIndex < questions.length) {
                 results.textContent = "Sorry, that's not correct."
-                questionIndex++
-                timer = timer - 5;
+                timer = timer - 5
                 setTimeout(() => {
                     renderQuestion();
                 }, 1000);
             }
-        }
-        else if (questionIndex === 2) {
-            if (element.matches("li#option1")) {
+            else {
+                if (element.textContent === currentQuestion.answer) {
+                    results.textContent = "Correct!"
+                    timer = timer + 5
+                    setTimeout(() => {
+                        window.location.href = "score.html"
+                    }, 1000);
+                } else {
+                    results.textContent = "Sorry, that's not correct"
+                    timer = timer - 5
 
-                results.textContent = "Correct!"
-                questionIndex++
-                timer = timer + 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-
-            } else {
-                results.textContent = "Sorry, that's not correct."
-                questionIndex++
-                timer = timer - 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-            }
-        }
-        else if (questionIndex === 3) {
-            if (element.matches("li#option2")) {
-
-                results.textContent = "Correct!"
-                questionIndex++
-                timer = timer + 5;
-                setTimeout(() => {
-                    window.location.href = "score.html"
-
-                }, 1000);
-
-            } else {
-                results.textContent = "Sorry, that's not correct."
-                questionIndex++
-                timer = timer - 5;
-                setTimeout(() => {
-                    window.location.href = "score.html"
-
-                }, 1000);
-
-
+                }
             }
 
         }
-
-
     })
 }
 
-
-
+//Array to hold the questions which are stored as objects
 var questions = [
     {
         label: "Question1",
@@ -242,8 +186,8 @@ var questions = [
         question: "Commonly used data types do not include:",
         options: [
             "Strings",
-            "Booleans",
             "Alerts",
+            "Booleans",
             "Numbers"
         ],
         answer: "Alerts"
@@ -269,14 +213,23 @@ var questions = [
             "myFunction;",
             "execute: myFunction;"
         ],
-        answer: "Hypertext Markup Language"
+        answer: "myFunction();"
 
+    },
+    {
+        label: "Question 5",
+        question: "Who was the creator of JavaScript?",
+        options: [
+            "Yukihior Matsumo",
+            "Rasmus Lerdorf",
+            "John Resig",
+            "Brendan Eich"
+        ],
+        answer: "Brendan Eich"
     }
 
 ]
-
-
-
+//If the final score text is available write the final score to it
 if (finalScore) {
     var timeDisplay = localStorage.getItem('time')
     finalScore.textContent = timeDisplay
