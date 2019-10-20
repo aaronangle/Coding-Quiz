@@ -52,51 +52,54 @@ function renderQuestion() {
         option4.textContent = questions[questionIndex].options[3];
     }
 }
-
+//Initialize the highscore list
 function initialize() {
     //get stored list from localStorage
     //Parse the JSON string to an object
-    var storedScoreList = JSON.parse(localStorage.getItem("ScoreList"))
+    var storedScoreList = JSON.parse(localStorage.getItem("scoreList"))
 
-    //if todos were retrieved from the localStorage, update the array for it
-    if (storeScoreList !== null) {
+    //if scorelist were retrieved from the localStorage, update the array for it
+    if (storedScoreList !== null) {
         scoreList = storedScoreList
+
     }
     renderScoreList();
 }
+if (returnHome) {
+    initialize();
+}
 function submitIt() {
+    event.preventDefault()
     //get the value of the submit and push it to the array
     var theTime = localStorage.getItem("time")
     var userName = textBox.value.trim();
     var name = userName + "   " + theTime;
-
-    if (userName) {
-        initialize();
-        highScoreContainer.style.display = "flex";
-
-        enterScore.style.display = 'none';
-        highScoreHeading.textContent = "Highscores"
-        clearScore.textContent = "Clear Scores"
-        returnHome.textContent = "Go Back"
-
-        scoreList.push(name)
-
-        storeScoreList();
-        renderScoreList();
-    } else {
+    name.toString()
+    if (userName === "") {
         alert("Please enter your initials into the textBox")
     }
+
+    highScoreContainer.style.display = "flex";
+    enterScore.style.display = 'none';
+    highScoreHeading.textContent = "Highscores"
+    clearScore.textContent = "Clear Scores"
+    returnHome.textContent = "Go Back"
+
+    scoreList.push(name)
+
+    storeScoreList();
+    renderScoreList();
 
 }
 
 function storeScoreList() {
     //stringify and set the scorelist to the local storage and the scorelist array
-    localStorage.setItem("ScoreList", JSON.stringify(scoreList))
+    localStorage.setItem("scoreList", JSON.stringify(scoreList))
 
 }
 function renderScoreList() {
-    highScoreList.innerHTML = ""
 
+    highScoreList.innerHTML = "";
     //render a new li for each score
     for (let i = 0; i < scoreList.length; i++) {
         var listItem = scoreList[i];
@@ -120,7 +123,7 @@ function homePage() {
     window.location.href = "index.html"
 }
 function viewScore() {
-
+    event.preventDefault();
     window.location.href = "score.html"
 
 }
@@ -159,8 +162,11 @@ if (questionList) {
                 } else {
                     results.textContent = "Sorry, that's not correct"
                     timer = timer - 5
-
+                    setTimeout(() => {
+                        window.location.href = "score.html"
+                    }, 1000);
                 }
+
             }
 
         }
