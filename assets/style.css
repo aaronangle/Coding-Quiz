@@ -113,7 +113,7 @@ html, body{
     border-radius: 5px;
     text-align: left;
 }
-#returnHome, #clearScore, #start{
+#returnHome, #clearScore, #start, .buttonRemove{
     background-color: purple;
     color: white;
     border: none;
@@ -123,7 +123,7 @@ html, body{
     text-align: center;
     margin: 10px;
 }
-#returnHome:hover, #clearScore:hover, #start:hover{
+#returnHome:hover, #clearScore:hover, #start:hover, .buttonRemove:hover{
     background-color: #d8d8d8;
     color: purple;
     cursor: pointer;
@@ -140,4 +140,9 @@ html, body{
 }
 li{
     margin: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.buttonRemove{
+    margin: 0px
 }
