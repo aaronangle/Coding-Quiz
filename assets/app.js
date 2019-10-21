@@ -43,7 +43,7 @@ function countDown() {
 function renderQuestion() {
     results.textContent = "";
     var currentQuestion = questions[questionIndex];
-
+    //For loop to render each option for the listed question
     for (var i = 0; i < currentQuestion.options.length; i++) {
         questionHeading.textContent = currentQuestion.question;
         option1.textContent = questions[questionIndex].options[0];
@@ -52,7 +52,56 @@ function renderQuestion() {
         option4.textContent = questions[questionIndex].options[3];
     }
 }
-//If the return home button is truthy then call the function
+//If the question list is truthy
+if (questionList) {
+    //add an event listener to the entire question list
+    questionList.addEventListener("click", function (event) {
+        //target where the user clicks
+        var element = event.target;
+        //Current question is set to the questionindex
+        var currentQuestion = questions[questionIndex];
+        //Will run 1 time each time the question list is clicked
+        for (let i = 0; i < 1; i++) {
+            //Adds one to the question index so a new question will be grabbed from the question array
+            questionIndex++;
+            //if the element clicked is equal to the answer display content
+            if (element.textContent === currentQuestion.answer && questionIndex < questions.length) {
+                results.textContent = "Correct!";
+                timer = timer + 5;
+                setTimeout(() => {
+                    renderQuestion();
+                }, 1000);
+            }
+            //if the user clicks on the wrong place
+            else if (questionIndex < questions.length) {
+                results.textContent = "Sorry, that's not correct.";
+                timer = timer - 5;
+                setTimeout(() => {
+                    renderQuestion();
+                }, 1000);
+            }
+            //This is for when the user is on the last question so it will redirect to the high score page
+            else {
+                if (element.textContent === currentQuestion.answer) {
+                    results.textContent = "Correct!";
+                    timer = timer + 5;
+                    setTimeout(() => {
+                        window.location.href = "score.html";
+                    }, 1000);
+                } else {
+                    results.textContent = "Sorry, that's not correct";
+                    timer = timer - 5;
+                    setTimeout(() => {
+                        window.location.href = "score.html";
+                    }, 1000);
+                }
+
+            }
+
+        }
+    })
+}
+//If the return home button is truthy then call the function of initialize
 if (returnHome) {
     initialize();
 }
@@ -78,8 +127,10 @@ function renderScoreList() {
 
         var li = document.createElement("li");
         li.textContent = listItem;
+        //Set a data-index so each score can be targeted individually
         li.setAttribute("data-index", i);
 
+        //Create a button and append it to the list
         var button = document.createElement("button")
         button.textContent = "Remove"
         button.setAttribute("class", "buttonRemove")
@@ -88,25 +139,28 @@ function renderScoreList() {
         highScoreList.appendChild(li);
     }
 }
-
+//If the highScoreList is truthy then add an event listener to it which can individually remove scores from the list based on the data-index number
 if (highScoreList) {
     highScoreList.addEventListener("click", function (event) {
         var element = event.target
-
+        //looks for where the user clicks and if it matches the button element
         if (element.matches("button")) {
+            //Data-index was assinged to the button on creation 
             var index = element.parentElement.getAttribute("data-index")
+            //Will remove the individual score from the array via the splice method
             scoreList.splice(index, 1);
-
+            //Runs the functions to render and store the scores
             storeScoreList();
             renderScoreList();
         }
     })
 }
-
-
-
-
-
+//If the final score text is available write the final score to it
+if (finalScore) {
+    var timeDisplay = localStorage.getItem('time');
+    finalScore.textContent = timeDisplay;
+}
+//Function for when a name is submitted into the input
 function submitIt() {
     event.preventDefault()
     //get the value of the submit and push it to the array
@@ -114,31 +168,28 @@ function submitIt() {
     var userName = textBox.value.trim();
     var name = userName + "   " + theTime;
     name.toString();
+    //if the username is empty an alert will be sent
     if (userName === "") {
         alert("Please enter your initials into the textBox");
     } else {
-
-
-
+        //Sets up the score list display
         highScoreContainer.style.display = "flex";
         enterScore.style.display = 'none';
         highScoreHeading.textContent = "Highscores";
         clearScore.textContent = "Clear Scores";
         returnHome.textContent = "Go Back";
-
+        //pushes the username and score to the scoreList array
         scoreList.push(name);
-
+        //Runs the function to store and render the score list
         storeScoreList();
         renderScoreList();
     }
 }
-
+//Sends the score list to the local storage
 function storeScoreList() {
     //stringify and set the scorelist to the local storage and the scorelist array
     localStorage.setItem("scoreList", JSON.stringify(scoreList));
-
 }
-
 //empties the scorelist array and renders the new empty list to the page
 function clearScores() {
     scoreList = [];
@@ -149,51 +200,9 @@ function clearScores() {
 function homePage() {
     window.location.href = "index.html";
 }
+//Goes to the score list on click
 function viewScore() {
     window.location.href = "score.html";
-}
-
-if (questionList) {
-    questionList.addEventListener("click", function (event) {
-        var element = event.target;
-
-        var currentQuestion = questions[questionIndex];
-
-        for (let i = 0; i < 1; i++) {
-            questionIndex++;
-            if (element.textContent === currentQuestion.answer && questionIndex < questions.length) {
-                results.textContent = "Correct!";
-                timer = timer + 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-            }
-            else if (questionIndex < questions.length) {
-                results.textContent = "Sorry, that's not correct.";
-                timer = timer - 5;
-                setTimeout(() => {
-                    renderQuestion();
-                }, 1000);
-            }
-            else {
-                if (element.textContent === currentQuestion.answer) {
-                    results.textContent = "Correct!";
-                    timer = timer + 5;
-                    setTimeout(() => {
-                        window.location.href = "score.html";
-                    }, 1000);
-                } else {
-                    results.textContent = "Sorry, that's not correct";
-                    timer = timer - 5;
-                    setTimeout(() => {
-                        window.location.href = "score.html";
-                    }, 1000);
-                }
-
-            }
-
-        }
-    })
 }
 //Array to hold the questions which are stored as objects
 var questions = [
@@ -257,10 +266,5 @@ var questions = [
     }
 
 ]
-//If the final score text is available write the final score to it
-if (finalScore) {
-    var timeDisplay = localStorage.getItem('time');
-    finalScore.textContent = timeDisplay;
-}
 
 
